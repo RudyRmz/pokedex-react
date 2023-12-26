@@ -107,8 +107,8 @@ export default function PokemonCard({ name, url }) {
         "bg-slate-200",
         "h-65 w-50",
         "flex flex-col items-center p-4 gap-1",
-        "rounded-md shadow-lg",
-        "hover:-translate-y-1 hover:opacity-85 cursor-pointer"
+        "rounded-md shadow-lg hover:shadow-black",
+        "transition ease-in-out hover:-translate-y-1 hover:opacity-90 cursor-pointer"
       )}
     >
       {/* Mostrar un mensaje de carga mientras se obtienen los datos */}
