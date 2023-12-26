@@ -20,18 +20,13 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <main className={clsx(" bg-white min-h-svh", "p-5 text-black")}>
+      <main className={clsx(" bg-slate-600 min-h-svh", "p-5 text-black")}>
         {/* <img
           src="https://1000marcas.net/wp-content/uploads/2020/01/Logo-Pokemon.png"
           alt=""
           className={clsx("w-52 mx-auto")}
         /> */}
-        <section
-          className={clsx(
-            "border border-red-500",
-            "flex flex-wrap justify-center gap-3"
-          )}
-        >
+        <section className={clsx("flex flex-wrap justify-center gap-3")}>
           {pokemonList.map((pokemon) => {
             return (
               <PokemonCard

@@ -62,20 +62,50 @@ export default function PokemonCard({ name, url }) {
       });
   }, [url]); // Asegúrate de incluir 'url' como dependencia para que el efecto se vuelva a ejecutar si cambia la URL
 
-  function capitalizarPrimeraLetra(typeName) {
-    // Verificar si la typeName está vacía
-    if (typeName.length === 0) {
-      return typeName;
-    }
+  const pokemonType1 = pokemon?.types?.[0]?.type?.name;
+  const pokemonType2 = pokemon?.types?.[1]?.type?.name;
 
-    // Obtener el primer carácter en mayúscula y concatenar el resto de la typeName
-    return typeName.charAt(0).toUpperCase() + typeName.slice(1);
+  //const pokemonType1 = "water";
+
+  const typeColors = {
+    water: "bg-blue-900",
+    grass: "bg-green-950",
+    steel: "bg-slate-700",
+    bug: "bg-lime-800",
+    dragon: "bg-purple-700",
+    electric: "bg-yellow-500",
+    ghost: "bg-indigo-700",
+    fire: "bg-red-700",
+    ice: "bg-sky-600",
+    fighting: "bg-orange-700",
+    normal: "bg-gray-500",
+    psychic: "bg-fuchsia-400",
+    rock: "bg-stone-800",
+    ground: "bg-yellow-950",
+    poison: "bg-violet-700",
+    flying: "bg-blue-400",
+    fairy: "bg-pink-500",
+  };
+
+  function getColorForType(type) {
+    // Convertimos el tipo a minúsculas para que sea insensible a mayúsculas
+    const lowercaseType = type.toLowerCase();
+
+    // Verificamos si el tipo proporcionado existe en el objeto typeColors
+    if (lowercaseType in typeColors) {
+      // Si existe, retornamos el valor correspondiente a la key
+      return typeColors[lowercaseType];
+    } else {
+      // Si no existe, puedes devolver un valor por defecto o null según tus necesidades
+      return "bg-black"; // Valor por defecto si el tipo no es encontrado
+    }
   }
+
   return (
     <article
       className={clsx(
-        "bg-green-500",
-        "h-64 w-50",
+        "bg-slate-200",
+        "h-65 w-50",
         "flex flex-col items-center p-4 gap-1",
         "rounded-md shadow-lg",
         "hover:-translate-y-1 hover:opacity-85 cursor-pointer"
@@ -95,14 +125,24 @@ export default function PokemonCard({ name, url }) {
           <h3 className={clsx("font-bold tracking-wide")}>
             {name.toUpperCase()}
           </h3>
-          <h2 className={clsx("font-medium")}>Tipo:</h2>
+          <h2 className={clsx("font-medium")}>Type:</h2>
           <section className={clsx("flex gap-2")}>
-            <div>
+            <div
+              className={clsx(
+                " p-1 font-semibold text-white rounded-lg w-[70px] text-center",
+                getColorForType(pokemonType1)
+              )}
+            >
               {pokemon?.types[0]?.type?.name.charAt(0).toUpperCase() +
                 pokemon?.types[0]?.type?.name.slice(1) || "Desconocido"}
             </div>
             {pokemon?.types[1] ? (
-              <div>
+              <div
+                className={clsx(
+                  " p-1 font-semibold text-white rounded-lg w-[70px] text-center",
+                  getColorForType(pokemonType2)
+                )}
+              >
                 {pokemon?.types[1]?.type?.name.charAt(0).toUpperCase() +
                   pokemon?.types[1]?.type?.name.slice(1)}
               </div>
